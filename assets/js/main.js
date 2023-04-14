@@ -277,3 +277,30 @@ portfolioDetailsLinks.forEach((link) => {
     }
   });
 });
+const form = document.querySelector(".php-email-form");
+const successMessage = document.querySelector("#success-message");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const url = event.target.action;
+
+  fetch(url, {
+    method: "POST",
+    body: new FormData(form),
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Hide the form and display the success message
+        form.style.display = "none";
+        successMessage.innerHTML = "Thank you for contacting me";
+        successMessage.style.display = "block";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+});
