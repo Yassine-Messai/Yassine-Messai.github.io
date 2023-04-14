@@ -1,19 +1,30 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Get form data
+if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['message'])) {
+
   $name = $_POST['name'];
   $email = $_POST['email'];
+  $subject = $_POST['subject'];
   $message = $_POST['message'];
+  $to = 'elmessaiyassine@gmail.com';
+  $body = "<html>
+              <body>
+                  <h2>Contact Request</h2>
+                  <hr>
+                  <p>Name: $name</p>
+                  <p>Email: $email</p>
+                  <p>Subject: $subject</p>
+                  <p>Message: $message</p>
+              </body>
+          </html>";
 
-  // Set up email message
-  $to = "elmessaiyassine@gmail.com";
-  $subject = "New message from " . $name;
-  $body = "Name: " . $name . "\n\nEmail: " . $email . "\n\nMessage: " . $message;
+  $headers = "From: $name <$email>\r\n";
+  $headers .= "Reply-To: $email\r\n";
+  $headers .= "MIME-Version: 1.0\r\n";
+  $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
-  // Send email
-  if (mail($to, $subject, $body)) {
-    echo "<p>Your message has been sent successfully.</p>";
+  if (mail($to, $subject, $body, $headers)) {
+    echo "<div class='alert alert-success'>Your message has been sent successfully.</div>";
   } else {
-    echo "<p>There was a problem sending your message. Please try again later.</p>";
+    echo "<div class='alert alert-danger'>The server failed to send the message. Please try again later.</div>";
   }
 }
