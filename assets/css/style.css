@@ -1308,3 +1308,32 @@ section {
 #footer .credits a {
   color: #34b7a7;
 }
+
+/* button of download STYLE  */
+     .button-container {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 50vh;
+     }
+  
+     .download-link {
+       text-decoration: none;
+     }
+  
+     .download-button {
+       background-color: #34b7a7;
+       color: white;
+       border: none;
+       border-radius: 5px;
+       padding: 12px 24px;
+       font-size: 18px;
+       font-weight: bold;
+       cursor: pointer;
+       box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+       transition: background-color 0.2s ease-in-out;
+     }
+  
+     .download-button:hover {
+       background-color: #39d756;
+     }
